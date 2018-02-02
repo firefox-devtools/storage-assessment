@@ -22,12 +22,13 @@
 				<p>Records can be created, retrieved, updated and deleted.</p>
 				<p><ul>
 						<li>Firefox: <ul>
-								<li>Records can barely be retrieved. Out of 100 initial records, only up to 50 are rendered in the IndexedDB view.</li>
+								<li>Records can barely be retrieved. Out of 100 initial records, only up to 50 are rendered in the localStorage, IndexedDB views.</li>
 								<li>Records can be sorted by key or value</li>
 							</ul>
 						</li>
 						<li>Chrome: <ul>
-								<li>it also only shows 50, but lets you move between 'pages' of 50 records.</li>
+								<li>IndexedDB also only shows 50, but lets you move between 'pages' of 50 records.</li>
+								<li>localStorage shows all the 100 records.</li>
 								<li>When refreshing the store data, you really need to close devtools and open again to see the new data, otherwise it keeps showing the old contents (?).</li>
 								<li>It's not possible to sort by key or value.</li>
 							</ul>

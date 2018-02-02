@@ -30,10 +30,11 @@ window.addEventListener('load', function() {
 
 		async reset() {
 			this.setupStore();
-			console.time('empty and insert records');
+			let markerName = `Empty and insert records [${this.name}]`;
+			console.time(markerName);
 			await this.emptyStore();
 			await this.insertDefaultsIntoStore();
-			console.timeEnd('empty and insert records');
+			console.timeEnd(markerName);
 		}
 
 		async setItem(key, value) {
@@ -69,6 +70,30 @@ window.addEventListener('load', function() {
 	}
 
 	
+	class LocalStorageProvider extends Provider {
+		constructor() {
+			super();
+			this.providerName = 'localStorage';
+		}
+
+		setupStore() {
+			this.store = localforage.createInstance({
+				name: this.name
+			});
+
+			this.store.config({
+				driver: localforage.LOCALSTORAGE
+			});
+		}
+
+		async emptyStore() {
+			return this.store.clear();
+		}
+
+		async setItem(key, value) {
+			return this.store.setItem(key, value);
+		}
+	}
 
 	// ----
 	
@@ -76,18 +101,17 @@ window.addEventListener('load', function() {
 
 	initialise();
 
-	function initialise() {	
+	async function initialise() {	
 		
 		// Create providers
-		providers = [IndexedDBProvider].map((cla) => {
+		providers = [IndexedDBProvider, LocalStorageProvider].map((cla) => {
 			return new cla();
 		});
 
-		// for each provider
-		providers.forEach((pro) => {
-			// empty records and initialise default data
-			pro.reset();
-		});
+		// for each provider, empty records and initialise default data
+		await Promise.all(providers.map((pro) => {
+			return pro.reset();
+		}));
 	}
 
 });
