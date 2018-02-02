@@ -21,10 +21,20 @@ window.addEventListener('load', function() {
 			// Insert a reasonably big amount of initial records to
 			// 'instigate pagination' and/or scrolling in the panel
 			let promises = [];
+			
 			for(let i = 0; i < 100; i++) {
 				let padded = StringFormat.pad(i, 3, '0');
 				promises.push(this.setItem(`test${padded}`, `Value ${i}`));
 			}
+
+			// Also insert an object to test the inspector's abilities to help the user
+			let obj = {
+				propertyA: 'value A',
+				propertyB: 'value B'
+			};
+			
+			promises.push(this.setItem('stringifiedObject', obj));
+
 			return Promise.all(promises);
 		}
 
@@ -62,6 +72,9 @@ window.addEventListener('load', function() {
 		}
 
 		async setItem(key, value) {
+			if(typeof(value) === 'object') {
+				value = JSON.stringify(value);
+			}
 			return docCookies.setItem(key, value);
 		}
 	}
@@ -119,6 +132,27 @@ window.addEventListener('load', function() {
 		}
 	}
 
+	class SessionStorageProvider extends Provider {
+		constructor() {
+			super();
+			this.providerName = 'sessionStorage';
+		}
+
+		setupStore() {
+		}
+
+		async emptyStore() {
+			window.sessionStorage.clear();
+		}
+
+		async setItem(key, value) {
+			if(typeof(value) === 'object') {
+				value = JSON.stringify(value);
+			}
+			window.sessionStorage.setItem(key, value);
+		}
+	}
+
 
 	// ----
 	
@@ -129,7 +163,7 @@ window.addEventListener('load', function() {
 	async function initialise() {	
 		
 		// Create providers
-		providers = [CookieProvider, IndexedDBProvider, LocalStorageProvider].map((cla) => {
+		providers = [CookieProvider, IndexedDBProvider, LocalStorageProvider, SessionStorageProvider].map((cla) => {
 			return new cla();
 		});
 
