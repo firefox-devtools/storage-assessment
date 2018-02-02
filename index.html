@@ -28,12 +28,16 @@
 				<p>Records can be created, retrieved, updated and deleted.</p>
 				<p><ul>
 						<li>Firefox: <ul>
-								<li>Create: can create cookies pressing the "+" button or context menu "Add Item" option.</li>
+								<li data-status="no">Create: can create cookies pressing the "+" button or context menu "Add Item" option. Cannot create items in localStorage or IndexedDB.</li>
 								<li>Retrieve: <ul>
 										<li data-status="no">Records can inconsistently be retrieved. Out of 100 initial records, only up to 50 are rendered in the localStorage, IndexedDB views. The whole 100 are rendered in the cookie view.</li>
 										<li>Records can be sorted by key, value (or other fields e.g. domain, in Cookie view).</li>
 								</ul></li>
-								<li>Delete: can delete individual cookies, can delete all by host or session (w/context menu).</li>
+								<li>Update: <ul>
+										<li>can edit some fields (by double clicking on the row) for Cookie, localStorage.</li>
+										<li data-status="no">Can't edit IndexedDB data.</li>
+								</ul></li>
+								<li>Delete: can delete individual cookies, can delete all by host or session (with context menu).</li>
 							</ul>
 						</li>
 						<li>Chrome: <ul>
@@ -43,6 +47,11 @@
 									<li>localStorage, Cookie show all the 100 records.</li>
 									<li data-status="no">When refreshing the store data, you really need to close devtools and open again to see the new data, otherwise it keeps showing the old contents (?).</li>
 									<li data-status="no">It's not possible to sort by key or value.</li>
+								</ul></li>
+								<li>Update: <ul>
+										<li>can edit some fields (by double clicking on the row) for Cookie and localStorage.</li>
+										<li data-status="no">Can't edit IndexedDB data.</li>
+										<li data-status="no">Cookies: seemingly no date validation for Expires column, although it rejects the change and goes back to 'Session' if the date is invalid.</li>
 								</ul></li>
 								<li>Delete: for all of cookie, localStorage, and IndexedDB views, it's possible to delete individual entries, selected or 'all' (with the forbidden sign button)</li>
 							</ul>
