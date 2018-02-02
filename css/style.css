@@ -1,0 +1,8 @@
+dt[data-status=no], dt[data-status=no]+dd {
+	color: red;
+}
+
+dt[data-status=no]:before {
+	content: "❌";
+	padding-right: 0.5rem;
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+		<title>Storage panel assessment</title>
+		<script src="js/vendor/StringFormat.js"></script>
+		<script src="js/vendor/localforage.js"></script>
+		<script src="js/main.js"></script>
+	</head>
+	<body>
+		<h1>Storage panel assessment</h1>
+		<dl>
+			<dt data-status="no">Provide summaries</dt>
+			<dd>
+				<p>Display at-a-glance storage information: number of entries, size/length, etc.</p>
+				<p><em>Not implemented</em></p>
+			</dd>
+			
+			<dt data-status="no">CRUD</dt>
+			<dd>
+				<p>Records can be created, retrieved, updated and deleted.</p>
+				<p><ul>
+						<li>Firefox: <ul>
+								<li>Records can barely be retrieved. Out of 100 initial records, only up to 50 are rendered in the IndexedDB view.</li>
+								<li>Records can be sorted by key or value</li>
+							</ul>
+						</li>
+						<li>Chrome: <ul>
+								<li>it also only shows 50, but lets you move between 'pages' of 50 records.</li>
+								<li>When refreshing the store data, you really need to close devtools and open again to see the new data, otherwise it keeps showing the old contents (?).</li>
+								<li>It's not possible to sort by key or value.</li>
+							</ul>
+						</li>
+					</ul>
+				</p>
+			</dd>
+
+			<dt data-status="no">Perceived as fast</dt>
+			<dd>
+				<p>The panel speed is perceived as fast. Visual feedback (spinners etc) is displayed while loading data.</p>
+				<p>Loading data is asynchronous or progressive. Rows are rendered as soon as they can be retrieved, or at least in batches.</p>
+				<p><em>"No data present for selected host" is erroneusly displayed while loading (albeit data is present). Everything is rendered at once.</em></p>
+			</dd>
+		</dl>
+	</body>
+</html>
