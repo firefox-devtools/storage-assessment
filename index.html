@@ -65,7 +65,7 @@
 				<p>Does not just display raw data. Attempts to parse stringified data and shows output in an object inspector.</p>
 				<p>
 					<ul>
-						<li>Firefox: when the row is active, the item's value is rendered on the sidebar if it's an object.</li>
+						<li data-status="no">Firefox: when the row is active, the item's value is rendered on the sidebar if it's an object. But it does not undecode urlencoded entries which are common in the Cookie view, so not entirely done.</li>
 						<li data-status="no">Chrome: in Cookie view, not implemented (data shown raw, very unreadable). Displayed as string in localStorage, Session Storage views. The item value is directly rendered as "Object" with inline inspector in the row in the IndexedDB view.</li>
 					</ul>
 				</p>
@@ -85,6 +85,22 @@
 						<li>Chrome: almost instant render--get to see a blank state for a fraction of a second, but no confusing weirdnesses</li>
 				</ul></p>
 			</dd>
+
+			<dt>Auto-refresh</dt>
+			<dd>
+				<p>The panels pick new changes and refresh automatically without user intervention. <button id="insert_data">Insert data</button></p>
+				<p><ul>
+						<li>Firefox: <ul>
+								<li>new data appears on the Cookie, localStorage and SessionStorage views - the 'refresh' button is seemingly superfluous here.</li>
+								<li data-status="no">Refresh required on IndexedDB view</li>
+						</ul></li>
+						<li>Chrome: <ul>
+							<li data-status="no">Need to manually press 'Refresh' button to get updated data.</li>
+							<li data-status="no">The refresh button is in different places depending on the view (bottom in IndexedDB, top in rest of views)</li>
+						</ul></li>
+				</ul></p>
+			</dd>
+
 		</dl>
 	</body>
 </html>

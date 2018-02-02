@@ -171,6 +171,19 @@ window.addEventListener('load', function() {
 		await Promise.all(providers.map((pro) => {
 			return pro.reset();
 		}));
+
+		// Attach handler to button that inserts new data into providers - to test whether the devtools acknowledge the new data automatically
+		let insertDataBtn = document.getElementById('insert_data');
+		let count = 0;
+		insertDataBtn.addEventListener('click', async function() {
+			let key = 'after-' + StringFormat.pad(count++, 3, '0');
+			await Promise.all(providers.map((pro) => {
+				return pro.setItem(key, 'It does not really matter');
+			}));
+
+			console.log(`Inserted data for the ${count}-th time`);
+		});
+
 	}
 
 });
