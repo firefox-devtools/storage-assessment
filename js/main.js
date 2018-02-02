@@ -44,6 +44,30 @@ window.addEventListener('load', function() {
 
 	}
 
+
+	class CookieProvider extends Provider {
+		constructor() {
+			super();
+			this.providerName = 'Cookie';
+		}
+
+		setupStore() {
+		}
+
+		async emptyStore() {
+			let keys = docCookies.keys();
+			keys.forEach((k) => {
+				docCookies.removeItem(k);
+			});
+		}
+
+		async setItem(key, value) {
+			return docCookies.setItem(key, value);
+		}
+	}
+
+
+
 	class IndexedDBProvider extends Provider {
 		constructor() {
 			super();
@@ -95,6 +119,7 @@ window.addEventListener('load', function() {
 		}
 	}
 
+
 	// ----
 	
 	let providers = [];
@@ -104,7 +129,7 @@ window.addEventListener('load', function() {
 	async function initialise() {	
 		
 		// Create providers
-		providers = [IndexedDBProvider, LocalStorageProvider].map((cla) => {
+		providers = [CookieProvider, IndexedDBProvider, LocalStorageProvider].map((cla) => {
 			return new cla();
 		});
 

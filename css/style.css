@@ -1,8 +1,8 @@
-dt[data-status=no], dt[data-status=no]+dd {
+dt[data-status=no] {
 	color: red;
 }
 
-dt[data-status=no]:before {
+*[data-status=no]:before {
 	content: "❌";
 	padding-right: 0.5rem;
 }
