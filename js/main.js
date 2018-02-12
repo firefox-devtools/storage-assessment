@@ -184,6 +184,19 @@ window.addEventListener('load', function() {
 			console.log(`Inserted data for the ${count}-th time`);
 		});
 
+		// Mark top-level branches as 'lacking' by traversing back the tree, starting on the nodes that were marked as data-status='no'
+		let root = document.querySelector('dl');
+		let nopes = Array.from(document.querySelectorAll('dl *[data-status=no]'));
+		console.log(nopes);
+		nopes.forEach((el) => {
+			let elParent;
+			do {
+				elParent = el.parentNode;
+				el = elParent;
+			} while(el.parentNode !== root);
+			el.dataset['status'] = 'no';
+		});
+
 	}
 
 });

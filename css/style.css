@@ -2,11 +2,11 @@ dt {
 	font-weight: bold;
 }
 
-dt[data-status=no] {
-	color: red;
-}
-
-*[data-status=no]:before {
+li[data-status=no]:before {
 	content: "❌";
 	padding-right: 0.5rem;
+}
+
+li[data-status=no] {
+	background: #fee;
 }
